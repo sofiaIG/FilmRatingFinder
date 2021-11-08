@@ -1,5 +1,5 @@
-import argparse
 import imdb
+import argparse
 import rotten_tomatoes_client
 import argparse
 import sys
@@ -21,7 +21,6 @@ my_parser.add_argument("Date",
                        help="release date of the film")
 
 args = my_parser.parse_args()
-
 input_title = args.Film
 input_date = args.Date
 
@@ -58,3 +57,4 @@ if score_rotten == None and score_imdb == None:
     print("Film not found")
     sys.exit()
 print(f"The film {input_title} is rated {score_imdb} on IMDB and {score_rotten} on rotten tomatoes.")
+print(score_rotten)
