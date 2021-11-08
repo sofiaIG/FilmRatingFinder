@@ -57,4 +57,4 @@ if score_rotten == None and score_imdb == None:
     print("Film not found")
     sys.exit()
 print(f"The film {input_title} is rated {score_imdb} on IMDB and {score_rotten} on rotten tomatoes.")
-print(score_rotten)
+
