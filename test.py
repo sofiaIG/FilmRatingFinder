@@ -1,32 +1,23 @@
 import unittest
-import main
-from unittest.mock import Mock
+import film_searching
 
-mock = Mock()
-mock.title = "something"
-mock.date = 2010
 
 class TestClass(unittest.TestCase):
 
-       def test_input(self):
-              parser = main.args_parser(mock.date, mock.title)#how do I test each argument separately?
-              self.assertTrue(main.args_parser(mock), list)
-              self.assertTrue(len(mock.title)> 250, "title too long")
+       def test_rotten_tomatoes(self):
+              self.assertTrue(film_searching.search_score_rotten("The Potato Film", 2010), type(None))
+              self.assertEqual(film_searching.search_score_rotten("The French Dispatch" ,2021), 75)
+              self.assertEqual(film_searching.search_score_rotten("Dune", 2021), 82)
 
-              #Testing if date is negative
-              number = -5
-              message = "this is negative"
-              self.assertTrue(mock.date>0, message)
+       def test_imdb(self):
+              self.assertEqual(film_searching.search_filmratings_imdb(1957, "12 Angry Men"), 9.0)
+              self.assertEqual(film_searching.search_filmratings_imdb(1957, "12 Angry Men"), 9.0)
+              self.assertEqual(film_searching.search_filmratings_imdb(1962, "To Kill a Mockingbird"), 8.3)
 
-       # self.assertEqual(input[0], str)
-       # need to create a separate function that takes the values and make sure that the values are not negative.
-       # def test_values(self):
-       #     values = main.testing_something()
+if __name__ == '__main__':
+    unittest.main()
 
 
-       def test_api(self):
-              rotten_tom_test = main.search_score_rotten("potato", 2010)
-              self.assertTrue(rotten_tom_test, type(None))
 
 
 
