@@ -6,7 +6,12 @@ import sys
 
 moviesDB_IMDb = imdb.IMDb()
 moviesDB_rotten = rotten_tomatoes_client.RottenTomatoesClient
-
+string = "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe"
+print(len(string))
+string_1 = "Night of the Day of the Dawn of the Son of the Bride of the Return of the Revenge of the" \
+           "Terror of the Attack of the Evil Mutant Hellbound Flesh" \
+           "Eating Crawling Alien Zombified Subhumanoid Living Dead, Part 5"
+print(len(string_1))
 
 def args_parser(args):
     my_parser = argparse.ArgumentParser(description="Name of the film and date of release")
@@ -28,7 +33,7 @@ def args_parser(args):
 
 
 
-def testing_something(args):
+def testing_something(args):#temporary name as I am trying something
     input_title = args.Film
     input_date = args.Date
     return [input_title,input_date]
@@ -36,12 +41,14 @@ def testing_something(args):
 
 def search_score_rotten(user, year_release):
     movie_search = moviesDB_rotten.search(user)
-    accessing_movies = movie_search["movies"]
-    for movie in accessing_movies:
-        name = movie["name"]
-        year = movie["year"]
-        if name.lower() == user.lower() and year == year_release:
-            return movie["meterScore"]
+    accessing_movies = movie_search["movies"]#that returns a json file-need to figure out how to work on json files
+    return accessing_movies #this returns a list. Within the list there is a dictionary. NOT A JSON FILE
+    #
+    # for movie in accessing_movies:
+    #     name = movie["name"]
+    #     year = movie["year"]
+    #     if name.lower() == user.lower() and year == year_release:
+    #         return movie["meterScore"]
 
 
 def find_movie_imdb(year_of_release, user):
@@ -60,15 +67,19 @@ def search_ratings_imdb(year_release, user):
     return rating
 
 args = args_parser(sys.argv[1:])
-print(args)
+# print(args)
 list_input =testing_something(args)
 title = list_input[0]
 year = list_input[-1]
 score_rotten = search_score_rotten(title, year)
-score_imdb = search_ratings_imdb(year, title)
-
-if score_rotten is None and score_imdb is None:
-    print("Film not found")
-    sys.exit()
-print(f"The film {title} is rated {score_imdb} on IMDB and {score_rotten} on rotten tomatoes.")
-
+outside_list = score_rotten[0]
+print(type(outside_list))
+print(outside_list)
+print(score_rotten)
+print(type(score_rotten))
+# score_imdb = search_ratings_imdb(year, title)
+#
+# if score_rotten is None and score_imdb is None:
+#     print("Film not found")
+#     sys.exit()
+# print(f"The film {title} is rated {score_imdb} on IMDB and {score_rotten} on rotten tomatoes.")
