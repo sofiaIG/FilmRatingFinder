@@ -10,13 +10,10 @@ def args_parser(args):
                        metavar="film",
                        type=str,
                        help="the film title")
-    try:
-        my_parser.add_argument("Date",
+    my_parser.add_argument("Date",
                        metavar="date",
                        type=int,
                        help="release date of the film")
-    except:
-        my_parser.error("The date needs to be an integer")
     return my_parser.parse_args(args)
 
 
