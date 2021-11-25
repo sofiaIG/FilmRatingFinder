@@ -48,24 +48,25 @@ def find_movie_imdb(year_of_release, title):
 def search_filmratings_imdb(year_release, title):
     moviesDB_IMDb = imdb.IMDb()
     movie_found = find_movie_imdb(year_release, title)
-    movie_found_elements = movie_found[0]
-    id = movie_found_elements.getID()
-    movie = moviesDB_IMDb.get_movie(id)
-    rating = movie['rating']
+    rating = 0
+    if movie_found != None:
+        movie_found_elements = movie_found[0]
+        id = movie_found_elements.getID()
+        movie = moviesDB_IMDb.get_movie(id)
+        rating = movie['rating']
     return rating
 
-
-args = args_parser(sys.argv[1:])
-list_input =title_date(args)
-title = list_input[0]
-year = list_input[-1]
-# score_rotten = search_score_rotten(title, year)
-score_imdb = search_filmratings_imdb(year, title)
-print(score_imdb)
-print(type(score_imdb))
+if __name__ == '__main__':
+    args = args_parser(sys.argv[1:])
+    list_input =title_date(args)
+    title = list_input[0]
+    year = list_input[-1]
+    score_rotten = search_score_rotten(title, year)
+    score_imdb = search_filmratings_imdb(year, title)
 
 
-# if score_rotten is None and score_imdb is None:
-#     print("Film not found")
-#     sys.exit()
-# print(f"The film {title} is rated {score_imdb} on IMDB and {score_rotten} on rotten tomatoes.")
+
+    if score_rotten is None and score_imdb is None:
+        print("Film not found")
+        sys.exit()
+    print(f"The film {title} is rated {score_imdb} on IMDB and {score_rotten} on rotten tomatoes.")
